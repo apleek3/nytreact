@@ -13,7 +13,7 @@
 
 const axios = require("axios");
 const router = require("express").Router();
-var APIKey = process.env.API_KEY
+var APIKey = "f707e238b7c84937921cc8933b487379";
 
 console.log(process.env.API_KEY)
 router.get("/recipes", (req, res) => {
