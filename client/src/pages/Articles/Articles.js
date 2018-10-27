@@ -65,7 +65,7 @@ export default class Articles extends Component {
     let { topic, sYear, eYear } = query
 
     let queryUrl = `https://api.nytimes.com/svc/search/v2/articlesearch.json?sort=newest&page=${this.state.page}`
-    let key = `&api-key= f707e238b7c84937921cc8933b487379`;
+    let key = `&api-key=f707e238b7c84937921cc8933b487379`;
 
     //removing spaces and connects the search params
     if(topic.indexOf(' ')>=0){
