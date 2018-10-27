@@ -6,7 +6,7 @@ import { H1, H3, H4 } from '../../components/Headings';
 import { Container, Row, Col } from "../../components/Grid";
 import { Panel, PanelHeading, PanelBody } from '../../components/Panel';
 import { Form, Input, FormBtn, FormGroup, Label } from "../../components/Form";
-import API_KEY from '../../credentials' // dotenv and I are on a break...
+//import API_KEY from '../../credentials' // dotenv and I are on a break...
 
 
 export default class Articles extends Component {
@@ -65,7 +65,7 @@ export default class Articles extends Component {
     let { topic, sYear, eYear } = query
 
     let queryUrl = `https://api.nytimes.com/svc/search/v2/articlesearch.json?sort=newest&page=${this.state.page}`
-    let key = `&api-key=` + API_KEY;
+    let key = `&api-key= f707e238b7c84937921cc8933b487379`;
 
     //removing spaces and connects the search params
     if(topic.indexOf(' ')>=0){
