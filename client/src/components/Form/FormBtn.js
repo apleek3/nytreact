@@ -1,5 +1,7 @@
 import React from "react";
 
+  //Neat component suggested for changing class types using a switch. 
+
 export const FormBtn = props => {
   let classes = 'btn ';
   switch(props.type){
@@ -28,7 +30,7 @@ export const FormBtn = props => {
     break;
   }
   classes += ' ' + props.additional
-  //use prop addClass to add any additional classes
+
   return (
     <button {...props} className={classes}>
       {props.children}

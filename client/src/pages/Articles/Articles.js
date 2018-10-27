@@ -6,7 +6,7 @@ import { H1, H3, H4 } from '../../components/Headings';
 import { Container, Row, Col } from "../../components/Grid";
 import { Panel, PanelHeading, PanelBody } from '../../components/Panel';
 import { Form, Input, FormBtn, FormGroup, Label } from "../../components/Form";
-import API_KEY from '../../credentials'
+import API_KEY from '../../credentials' // dotenv and I are on a break...
 
 
 export default class Articles extends Component {
@@ -86,9 +86,9 @@ export default class Articles extends Component {
     API
       .queryNYT(queryUrl)
       .then(results => {
-          //concatenating new results to the current state of results.  If empty will just show results,
-          //but if search was done to get more, it shows all results.  Also stores current search terms
-          //for conditional above, and sets the noResults flag for conditional rendering of components below
+          // Concatenates results to the current state of results.  
+          // If empty will just show results, but if search was done to get more, it shows all results.  
+          // Also stores current search terms according to conditionals above, and alternates noResults for conditional rendering of components
           this.setState({
             results: [...this.state.results, ...results.data.response.docs],
             previousSearch: query,
@@ -102,12 +102,11 @@ export default class Articles extends Component {
       .catch(err=> console.log(err))
   }
 
-  //function that is called when user clicks the get more results button
+  // Adds more articles to the page!
   getMoreResults = () => {
     let { topic, eYear, sYear} = this.state.previousSearch;
     let query = { topic, eYear, sYear }
-    //increments page number for search and then runs query
-    let page = this.state.page;
+    let page = this.state.page; //increments page number for search and then runs query
     page++
     this.setState({page: page}, function (){
       this.getArticles(query)

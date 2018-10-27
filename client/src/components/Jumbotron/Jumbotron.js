@@ -12,7 +12,7 @@ export default class Jumbotron extends React.Component {
 
   render() {
     return (
-      <div style={{ height: 200, clear: 'both', marginTop: this.state.navbarHeight }} className="jumbotron">
+      <div style={{clear: 'both', marginTop: this.state.navbarHeight }} className="jumbotron">
         {this.props.children}
       </div>
     )
