@@ -6,9 +6,8 @@ import { H1, H3, H4 } from '../../components/Headings';
 import { Container, Row, Col } from "../../components/Grid";
 import { Panel, PanelHeading, PanelBody } from '../../components/Panel';
 import { Form, Input, FormBtn, FormGroup, Label } from "../../components/Form";
-require('dotenv').config();
+import API_KEY from '../../credentials'
 
-const API_KEY = process.env.API_KEY
 
 export default class Articles extends Component {
   state = {
@@ -54,7 +53,6 @@ export default class Articles extends Component {
     let { topic, sYear, eYear } = this.state;
     let query = { topic, sYear, eYear }
     this.getArticles(query)
-    console.log(API_KEY)
   };
 
   //function that connectus us to the NYT API
@@ -67,7 +65,7 @@ export default class Articles extends Component {
     let { topic, sYear, eYear } = query
 
     let queryUrl = `https://api.nytimes.com/svc/search/v2/articlesearch.json?sort=newest&page=${this.state.page}`
-    let key = `&api-key=f707e238b7c84937921cc8933b487379`;
+    let key = `&api-key=` + API_KEY;
 
     //removing spaces and connects the search params
     if(topic.indexOf(' ')>=0){
