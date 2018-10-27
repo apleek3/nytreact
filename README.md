@@ -12,6 +12,7 @@ A search and save app that uses NY Times API to search for articles and uses Rea
 * Node & Express - for Application routing and running
 * Moment.js - for time formatting and display
 * Axios- javascript library for http requests
+* Heroku - for deployment
 
 
 ## Setup
