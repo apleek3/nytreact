@@ -1,53 +1,33 @@
-// const express = require("express");
-
-// const mongoose = require("mongoose");
-// const routes = require("./routes");
-// const app = express();
-// const PORT = process.env.PORT || 3001;
-
-// // Define middleware here
-// app.use(express.urlencoded({ extended: true }));
-// app.use(express.json());
-// // Serve up static assets (usually on heroku)
-// if (process.env.NODE_ENV === "production") {
-//   app.use(express.static("client/build"));
-// }
-// // Add routes, both API and view
-// app.use(routes);
-
-// // Connect to the Mongo DB
-// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/nytreact");
-
-// // Start the API server
-// app.listen(PORT, function() {
-//   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
-// });
-
-//////////////////////////////////////////////////////////
 const express = require("express");
-const path = require("path");
-
-const PORT = process.env.PORT || 3001;
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+const logger = require('morgan');
+const path = require('path');
+const routes = require("./routes");
 const app = express();
-const apiRoutes = require("./routes/api/apiRoutes");
 
-// Define middleware here
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-// Serve up static assets (usually on heroku)
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-}
+// Body Parser
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+// Logger
+app.use(logger('combined'))
+// Static Assets
+app.use(express.static(path.join(__dirname, "client/build")));
+// Routes
+app.use(routes);
 
-// Use apiRoutes
-app.use("/api", apiRoutes);
+// Mongoose Promises - still not sure
+mongoose.Promise = global.Promise;
+// Connect to the Mongo DB
+mongoose.connect(
+  process.env.MONGODB_URI || "mongodb://localhost/nytreact",
+  {
+     useNewUrlParser: true //added per command line deprecation warning
+  }
+);
 
-// Send every request to the React app
-// Define any API routes before this runs
-app.get("*", function(req, res) {
-  res.sendFile(path.join(__dirname, "./client/build/index.html"));
-});
-
+// Start the API server
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, function() {
-  console.log(`🌎 ==> Server now on port ${PORT}!`);
+  console.log(`API Server now listening on PORT ${PORT}...`);
 });
